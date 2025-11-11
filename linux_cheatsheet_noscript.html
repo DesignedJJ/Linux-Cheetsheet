@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Linux Cheatsheet — No-Script Expanders</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0b1b3b;
+    --card: #ffffff;
+    --accent: #ff7a00;
+    --text: #0c1430;
+    --muted: #6b7280;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    background: linear-gradient(180deg, #0b1b3b 0%, #10214a 100%);
+    color: var(--card);
+  }
+  .container { max-width: 1100px; margin: 40px auto; padding: 0 16px; }
+  header { text-align: center; margin-bottom: 28px; }
+  h1 { font-weight: 700; margin: 0 0 6px; }
+  .subtitle { color: #c9d3ff; font-weight: 300; margin: 0; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px; margin-top: 22px; }
+  .card {
+    background: var(--card);
+    color: var(--text);
+    border-radius: 18px;
+    border: 1px solid rgba(255,255,255,0.06);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.2);
+    overflow: hidden;
+    transition: transform .2s ease, box-shadow .2s ease;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 16px 32px rgba(0,0,0,0.28); }
+  .card-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto auto;
+    align-items: center;
+    gap: 12px;
+    padding: 16px 18px;
+    background: linear-gradient(90deg, rgba(255,122,0,0.12), rgba(255,122,0,0));
+    cursor: pointer;
+    list-style: none;
+  }
+  details > summary { list-style: none; }
+  details > summary::-webkit-details-marker { display: none; }
+  .cmd-pill {
+    border: 2px solid var(--accent);
+    color: var(--accent);
+    font-weight: 600;
+    padding: 8px 12px;
+    border-radius: 12px;
+    white-space: nowrap;
+    user-select: text;
+  }
+  .purpose { font-weight: 500; }
+  .example { color: var(--muted); font-size: 0.9rem; justify-self: end; }
+  .chevron { margin-left: 8px; transition: transform .2s ease; }
+  details[open] .chevron { transform: rotate(90deg); }
+  .card-body { padding: 0 18px 16px; }
+  .note {
+    border-left: 4px solid var(--accent);
+    background: #fff6ef;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-top: 10px;
+    color: #6a3b00;
+    font-size: 0.95rem;
+  }
+  .section { margin-top: 16px; }
+  .footer { text-align: center; color: #aab3d6; margin: 28px 0 10px; font-size: 0.9rem; }
+  @media print {
+    body { background: #fff; color: #000; }
+    .card { break-inside: avoid; page-break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Linux Cheatsheet</h1>
+      <p class="subtitle">Click a command card to expand for deeper explanations • Colors: White / Navy / Orange • Font: Poppins</p>
+    </header>
+    <div class="grid">
+      
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">pwd</span>
+          <span class="purpose">Print current directory</span>
+          <span class="example"><strong>Example:</strong> pwd</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Shows your current working directory (absolute path). Use before file ops to avoid mistakes.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">ls</span>
+          <span class="purpose">List directory contents</span>
+          <span class="example"><strong>Example:</strong> ls -la</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Lists files/dirs. -l long format, -a include hidden, -h human sizes (with -l).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">cd</span>
+          <span class="purpose">Change directory</span>
+          <span class="example"><strong>Example:</strong> cd /var/log</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Move around the filesystem. cd .. up a level, cd ~ to home, cd - to previous dir.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">mkdir</span>
+          <span class="purpose">Create directory</span>
+          <span class="example"><strong>Example:</strong> mkdir -p projects/app/logs</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Creates directories. -p makes parent dirs as needed for nested paths.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">rmdir</span>
+          <span class="purpose">Remove empty directory</span>
+          <span class="example"><strong>Example:</strong> rmdir old_folder</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Deletes an empty directory. For non-empty, use rm -r (careful).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">rm</span>
+          <span class="purpose">Delete files/directories</span>
+          <span class="example"><strong>Example:</strong> rm -rf folder_name</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Deletes files/dirs. -r recursive, -f force (no prompt). Irreversible; double check path.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">touch</span>
+          <span class="purpose">Create empty file</span>
+          <span class="example"><strong>Example:</strong> touch file.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Creates an empty file or updates its modified time if it exists.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">cp</span>
+          <span class="purpose">Copy file/folder</span>
+          <span class="example"><strong>Example:</strong> cp -r src/ dst/</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Copies files. -r for dirs, -i prompt before overwrite, -a preserve attributes.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">mv</span>
+          <span class="purpose">Move/rename</span>
+          <span class="example"><strong>Example:</strong> mv file.txt newfile.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Moves or renames files/dirs. Also used to organize into directories.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">cat</span>
+          <span class="purpose">View file content</span>
+          <span class="example"><strong>Example:</strong> cat file.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Prints contents to terminal. Best for small files or piping to other tools.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">nano</span>
+          <span class="purpose">Edit file (Nano)</span>
+          <span class="example"><strong>Example:</strong> nano config.cfg</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Beginner-friendly editor. Save: Ctrl+O, Exit: Ctrl+X, Search: Ctrl+W.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">vim</span>
+          <span class="purpose">Edit file (Vim)</span>
+          <span class="example"><strong>Example:</strong> vim index.html</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Modal editor. i insert, Esc :wq save & quit, :q! quit without saving.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">head</span>
+          <span class="purpose">First lines of file</span>
+          <span class="example"><strong>Example:</strong> head -n 5 file.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Peek at headers. Combine with pipes to inspect data quickly.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">tail</span>
+          <span class="purpose">Last lines of file</span>
+          <span class="example"><strong>Example:</strong> tail -n 5 log.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">See recent lines. Use -f to follow a growing file (logs).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">grep</span>
+          <span class="purpose">Search in text</span>
+          <span class="example"><strong>Example:</strong> grep -i "error" /var/log/syslog</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Matches patterns. -i case-insensitive, -n line numbers, -C NUM context, -r recursive.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">find</span>
+          <span class="purpose">Locate files</span>
+          <span class="example"><strong>Example:</strong> find /etc -name "*.conf"</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Search by name, type (-type f/d), size (-size), time (-mtime). Use -exec for actions.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">locate</span>
+          <span class="purpose">Quick path lookup</span>
+          <span class="example"><strong>Example:</strong> locate .bashrc</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Searches an index (updatedb). Very fast for known paths.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">chmod</span>
+          <span class="purpose">Change permissions</span>
+          <span class="example"><strong>Example:</strong> chmod 755 script.sh</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Set permissions (numeric/symbolic). 7=rwx,6=rw-,5=r-x,4=r--. Dirs need x to enter.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">chown</span>
+          <span class="purpose">Change owner/group</span>
+          <span class="example"><strong>Example:</strong> sudo chown user:group file.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Change file owner/group. -R for recursive. chgrp changes only group.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">df</span>
+          <span class="purpose">Disk space usage</span>
+          <span class="example"><strong>Example:</strong> df -h</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Filesystem usage across mounts. -h human readable.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">du</span>
+          <span class="purpose">Folder/file size</span>
+          <span class="example"><strong>Example:</strong> du -sh folder/</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Summarize usage. -s summary only, -h human readable. Great for finding large dirs.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">free</span>
+          <span class="purpose">Memory usage</span>
+          <span class="example"><strong>Example:</strong> free -h</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">RAM and swap stats. For live detail, use top/htop.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">top</span>
+          <span class="purpose">Process viewer</span>
+          <span class="example"><strong>Example:</strong> top</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Interactive process list. Sort by CPU; M sorts by memory; k to kill by PID.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">htop</span>
+          <span class="purpose">Enhanced process viewer</span>
+          <span class="example"><strong>Example:</strong> htop</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Colorized tree view (if installed), mouse support—easier than top.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">ps</span>
+          <span class="purpose">List processes (snapshot)</span>
+          <span class="example"><strong>Example:</strong> ps aux | grep nginx</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">One-shot view. Combine with grep to filter.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">kill</span>
+          <span class="purpose">Terminate process</span>
+          <span class="example"><strong>Example:</strong> kill -15 1234</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Send signal to PID. 15=TERM graceful; 9=KILL force (last resort).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">killall</span>
+          <span class="purpose">Kill by name</span>
+          <span class="example"><strong>Example:</strong> killall firefox</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Terminates all processes with a given name (use carefully).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">man</span>
+          <span class="purpose">Manual pages</span>
+          <span class="example"><strong>Example:</strong> man tar</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Open command docs. / to search, n for next, q to quit.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">history</span>
+          <span class="purpose">Command history</span>
+          <span class="example"><strong>Example:</strong> history | tail</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Review previous commands. !N reruns entry N; history -c clears.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">tar</span>
+          <span class="purpose">Archive/compress</span>
+          <span class="example"><strong>Example:</strong> tar -czvf archive.tar.gz folder/</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">c create, x extract, z gzip, v verbose, f file. Extract with -xzvf -C dest/.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">unzip</span>
+          <span class="purpose">Extract ZIP</span>
+          <span class="example"><strong>Example:</strong> unzip archive.zip -d out/</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">List with -l; choose destination with -d.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">wget</span>
+          <span class="purpose">Download from URL</span>
+          <span class="example"><strong>Example:</strong> wget -O file.txt https://example.com/file.txt</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Non-interactive fetch. Resume with -c; use for simple downloads.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">curl</span>
+          <span class="purpose">Transfer data</span>
+          <span class="example"><strong>Example:</strong> curl -I https://api.example.com</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Versatile: headers (-I), output (-o), data (-d), custom header (-H).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">ssh</span>
+          <span class="purpose">Secure remote login</span>
+          <span class="example"><strong>Example:</strong> ssh -i ~/.ssh/key user@10.0.0.1</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Encrypted shell to remote hosts. Config: ~/.ssh/config.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">scp</span>
+          <span class="purpose">Secure file transfer</span>
+          <span class="example"><strong>Example:</strong> scp -r dir user@host:/path</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Copy over SSH. -r for dirs; -i specify key.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">sudo</span>
+          <span class="purpose">Run as superuser</span>
+          <span class="example"><strong>Example:</strong> sudo apt update</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Execute with elevated privileges (sudoers needed).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">apt</span>
+          <span class="purpose">Debian/Ubuntu packages</span>
+          <span class="example"><strong>Example:</strong> sudo apt install nginx</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Install/update/remove packages. Run apt update; apt upgrade regularly.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">yum</span>
+          <span class="purpose">RHEL/CentOS packages</span>
+          <span class="example"><strong>Example:</strong> sudo yum install httpd</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Older RHEL/CentOS. On newer, use dnf (same syntax).</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">reboot</span>
+          <span class="purpose">Reboot system</span>
+          <span class="example"><strong>Example:</strong> sudo reboot</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Safely restart the machine.</div>
+        </div>
+      </details>
+    
+      <details class="card">
+        <summary class="card-header">
+          <span class="cmd-pill">shutdown</span>
+          <span class="purpose">Shutdown system</span>
+          <span class="example"><strong>Example:</strong> sudo shutdown now</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <div class="note">Power off. Use shutdown -r now to reboot; schedule with a time.</div>
+        </div>
+      </details>
+    
+    </div>
+    <div class="section">
+      
+      <details class="section card">
+        <summary class="card-header">
+          <span class="cmd-pill">Service Management (systemd vs SysV)</span>
+          <span class="purpose">Tap to expand</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <pre style="white-space: pre-wrap; font-family: inherit; margin: 0;">Modern (systemd):
+• systemctl start <service> — start now
+• systemctl stop <service> — stop
+• systemctl restart <service> — restart (apply changes)
+• systemctl status <service> — status + recent logs
+• systemctl enable <service> — start at boot
+• systemctl disable <service> — disable at boot
+• journalctl -u <service> — view service logs
+
+Legacy/compat (SysV init):
+• service <service> start|stop|restart|status</pre>
+        </div>
+      </details>
+    
+      <details class="section card">
+        <summary class="card-header">
+          <span class="cmd-pill">OS / Kernel Information</span>
+          <span class="purpose">Tap to expand</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <pre style="white-space: pre-wrap; font-family: inherit; margin: 0;">• cat /etc/os-release — distro name/version
+• lsb_release -a — LSB info (if installed)
+• uname -a — kernel version/arch</pre>
+        </div>
+      </details>
+    
+      <details class="section card">
+        <summary class="card-header">
+          <span class="cmd-pill">Viewing Logs & Common Log Files</span>
+          <span class="purpose">Tap to expand</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <pre style="white-space: pre-wrap; font-family: inherit; margin: 0;">Viewing:
+• less /var/log/syslog — pager with search (/)
+• tail -f /var/log/syslog — follow live logs
+• grep -i 'error' /var/log/syslog — search case-insensitive
+• journalctl -xe — recent systemd logs with context
+
+Common logs under /var/log/:
+• /var/log/syslog or /var/log/messages — general messages
+• /var/log/auth.log — authentication/sudo activity
+• /var/log/kern.log — kernel messages
+• /var/log/dpkg.log — package history (Debian/Ubuntu)
+• App logs e.g., /var/log/nginx/, /var/log/apache2/
+(Many require sudo to read.)</pre>
+        </div>
+      </details>
+    
+      <details class="section card">
+        <summary class="card-header">
+          <span class="cmd-pill">Users, Groups, Permissions — Quick Ref</span>
+          <span class="purpose">Tap to expand</span>
+          <span class="chevron">▶</span>
+        </summary>
+        <div class="card-body">
+          <pre style="white-space: pre-wrap; font-family: inherit; margin: 0;">Users & groups:
+• useradd / usermod / userdel — manage users
+• groupadd / groupmod / groupdel — manage groups
+• id <user> — show UID/GID and group memberships
+
+Ownership & permissions:
+• chown user:group path — change owner & group
+• chgrp group path — change group only
+• chmod 644 file — rw-r--r-- (owner read/write; others read-only)
+  Octal: 7=rwx, 6=rw-, 5=r-x, 4=r--, 0=---
+  Symbolic: chmod u=rwx,g=rx,o=r file
+Notes: Directories need 'x' to enter. Use -R for recursive.</pre>
+        </div>
+      </details>
+    
+    </div>
+    <div class="footer">
+      Built for quick reference • Last updated 2025-09-15
+    </div>
+  </div>
+</body>
+</html>
