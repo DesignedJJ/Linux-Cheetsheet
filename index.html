@@ -13,6 +13,43 @@
     --text: #0c1430;
     --muted: #6b7280;
   }
+
+  /* ===== Header & Menu (No JS) ===== */
+.site-header {
+  position: sticky; top: 0; z-index: 1000;
+  background: rgba(11,27,59,0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+.site-header .bar {
+  max-width: 1100px; margin: 0 auto; padding: 10px 16px;
+  display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 12px;
+}
+.brand {
+  display: inline-flex; align-items: baseline; gap: 10px; color: #fff; text-decoration: none;
+}
+.brand .title { font-weight: 700; letter-spacing: .2px; }
+.brand .tag { color: #c9d3ff; font-weight: 300; font-size: .9rem; }
+
+.menu details { position: relative; }
+.menu summary {
+  list-style: none; cursor: pointer;
+  border: 2px solid var(--accent); color: var(--accent);
+  padding: 6px 12px; border-radius: 12px; font-weight: 600;
+  user-select: none;
+}
+.menu summary::-webkit-details-marker { display: none; }
+.menu .dropdown {
+  position: absolute; right: 0; margin-top: 8px;
+  background: var(--card); color: var(--text);
+  border: 1px solid rgba(0,0,0,0.08); border-radius: 12px;
+  box-shadow: 0 12px 24px rgba(0,0,0,0.25); min-width: 220px; overflow: hidden;
+}
+.menu .dropdown a {
+  display: block; padding: 10px 14px; text-decoration: none; color: var(--text);
+}
+.menu .dropdown a:hover { background: rgba(255,122,0,0.08); }
+
   * { box-sizing: border-box; }
   html, body {
     margin: 0;
@@ -80,6 +117,28 @@
 </style>
 </head>
 <body>
+  <header class="site-header" role="banner">
+  <div class="bar">
+    <a class="brand" href="./">
+      <span class="title">Cheatsheets</span>
+      <span class="tag">Linux & MySQL</span>
+    </a>
+
+    <nav class="menu" role="navigation" aria-label="Main">
+      <details>
+        <summary aria-haspopup="menu" aria-expanded="false">Menu ▾</summary>
+        <div class="dropdown" role="menu">
+          <a href="index.html" role="menuitem">Home (Linux Cheatsheet)</a>
+          <a href="mysqlcheet.html" role="menuitem">MySQL Cheatsheet</a>
+          <!-- Add more links as you publish:
+          <a href="git.html" role="menuitem">Git Cheatsheet</a>
+          -->
+        </div>
+      </details>
+    </nav>
+  </div>
+</header>
+
   <div class="container">
     <header>
       <h1>Linux Cheatsheet</h1>
