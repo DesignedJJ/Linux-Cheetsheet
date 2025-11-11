@@ -1,0 +1,1 @@
+A lightweight, fast-reference Linux cheat sheet compiled for everyday command-line work. This guide focuses on essential commands, quick examples, and practical usage patterns—perfect for beginners exploring the terminal or experienced users needing a rapid refresher
